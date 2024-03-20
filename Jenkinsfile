@@ -1,45 +1,61 @@
 pipeline {
     agent any
-
+    
     stages {
+        stage('Checkout') {
+            steps {
+                echo 'Checking out code from the repository'
+                script {
+                    // Checkout code from Git repository
+                    git branch: 'main', url: 'https://github.com/khushi011324/jenkins5.git'
+                }
+            }
+        }
+        
         stage('Build') {
             steps {
-                echo 'Build App'
+                echo 'Starting Build stage using Maven'
+               
             }
         }
-
-        stage('Test') {
+        
+        stage('Unit and Integration Tests') {
             steps {
-                echo 'Test App'
-            }
-            post {
-                success {
-                    emailext body: 'Testing has passed successfully', subject: 'Testing Status', to: 'khushi1317@gmail.com'
-                }
+                echo 'Starting Unit and Integration Tests stage using TestNG'
+                emailext attachLog: true, body: 'uyhgtfr', subject: 'hu', to: 'khushi131721@gmail.com'
+                
             }
         }
-
-        stage('Security') {
+        
+        stage('Code Analysis') {
             steps {
-                echo 'Perform Security Checks'
-            }
-            post {
-                success {
-                    emailext body: 'Security checks have passed successfully', subject: 'Security Status', to: 'khushi1317@gmail.com'
-                }
+                echo 'Starting Code Analysis stage using SonarQube'
             }
         }
-
-        stage('Deploy') {
+        
+        stage('Security Scan') {
             steps {
-                echo 'Deploy App'
+                echo 'Starting Security Scan stage using SonarQube'
+                 emailext attachLog: true, body: 'uyhgtfr', subject: 'hu', to: 'khushi131721@gmail.com'
             }
         }
-    }
-
-    post {
-        always {
-            emailext body: 'Summary', subject: 'Pipeline Status', to: 'khushi1317@gmail.com'
+        
+        stage('Deploy to Staging') {
+            steps {
+                echo 'Starting Deploy to Staging stage using Docker'
+            }
+        }
+        
+        stage('Integration Tests on Staging') {
+            steps {
+                echo 'Starting Integration Tests on Staging stage using Selenium'
+            }
+        }
+        
+        stage('Deploy to Production') {
+            steps {
+                echo 'Starting Deploy to Production stage using Docker'
+            }
         }
     }
 }
