@@ -22,7 +22,7 @@ pipeline {
         stage('Unit and Integration Tests') {
             steps {
                 echo 'Starting Unit and Integration Tests stage using TestNG'
-                emailext attachLog: true, body: 'uyhgtfr', subject: 'hu', to: 'khushi131721@gmail.com'
+                emailext attachLog: true, body: 'Note - Please do not reply to this email . Hello, Please find the job details below: ', subject: 'Status-Test-job', to: 'khushi131721@gmail.com'
                 
             }
         }
@@ -36,7 +36,7 @@ pipeline {
         stage('Security Scan') {
             steps {
                 echo 'Starting Security Scan stage using SonarQube'
-                 emailext attachLog: true, body: 'uyhgtfr', subject: 'hu', to: 'khushi131721@gmail.com'
+                 emailext attachLog: true, body: 'Note - Please do not reply to this email . Hello, Please find the job details below: ', subject: 'Security-Scan-job', to: 'khushi131721@gmail.com'
             }
         }
         
